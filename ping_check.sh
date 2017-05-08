@@ -4,8 +4,13 @@ ping_check() {
 
 	#validation - number of arguments 
 	if [ $# -eq 0 ]; then
-		echo 'Usage: $1=destination ip $2=the limit of retry(optional, default: 5) $3=retry interval(optional, [smhd]option available, default: 10s)' 1>&2
-		exit 1
+	cat <<EOF
+	ping_check() is a tool for ...
+
+	Usage:
+		ping_check [destination IP] [the limit of retry(optional, default:5)] [retry interval((optional, [smhd]option available, default: 10s)]
+EOF
+		exit 0 
 	fi
 
 	#$1 IP validation

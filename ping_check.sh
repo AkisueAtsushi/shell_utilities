@@ -3,8 +3,8 @@
 ping_check() {
 
 	#validation - number of arguments 
-	if [ $# -lt 2 ]; then
-		echo 'Usage: $1=destination ip $2=the limit of retry $3=retry interval(optional, [smhd]option available, default: 10s)' 1>&2
+	if [ $# -eq 0 ]; then
+		echo 'Usage: $1=destination ip $2=the limit of retry(optional, default: 5) $3=retry interval(optional, [smhd]option available, default: 10s)' 1>&2
 		exit 1
 	fi
 
@@ -18,18 +18,23 @@ ping_check() {
 	fi
 
 	#$2 Natural number validation
-	expr ${2} + 1 > /dev/null 2>&1
-	if [ $? -lt 2 -a $2 -gt 0 ] ; then
-		local readonly RETRY_LIMIT=$2
+	if [ -z $2 ]; then
+		local readlonly RETRY_LIMIT=5
 	else
-  		echo "$2 is not natural number." 1>&2
-		exit 1
+		expr ${2} + 1 > /dev/null 2>&1
+		local readonly RESULT=$?
+		if [ $RESULT -lt 2 -a $2 -gt 0 ]; then
+			local readonly RETRY_LIMIT=$2
+		else
+  			echo "$2 is not natural number." 1>&2
+			exit 1
+		fi
 	fi
 
 	#$3 sleep seconds 
 	if [ -z $3 ]; then
 		#default(second)
-		local SLEEP_TIME=10
+		local SLEEP_TIME="10s"
 	else
 		local SLEEP_TIME="$3"
 	fi

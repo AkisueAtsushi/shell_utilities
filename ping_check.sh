@@ -28,9 +28,10 @@ ping_check() {
 
 	#$3 sleep seconds 
 	if [ -z $3 ]; then
-		local SLEEP_SECOND="10s"
+		#default(second)
+		local SLEEP_TIME=10
 	else
-		local SLEEP_SECOND="$3s"
+		local SLEEP_TIME="$3"
 	fi
 
 	local RETRY_COUNT=0
@@ -49,6 +50,6 @@ ping_check() {
                 	fi
         	fi
 
-		/bin/sleep $SLEEP_SECOND
+		/bin/sleep $SLEEP_TIME
 	done
 }

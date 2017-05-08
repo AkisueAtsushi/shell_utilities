@@ -8,7 +8,7 @@ Any useful shell scripts for maintaining server
 it only contains "ping_check" function.  
 
 Usage:  
-	$1=destination ip  
+	$1=destination IP   
 	$2=the limit of retry(optional, default: 5)  
 	$3=retry interval(optional, [smhd]option available, default: 10s)  
 

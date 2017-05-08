@@ -4,7 +4,7 @@ ping_check() {
 
 	#validation - number of arguments 
 	if [ $# -lt 2 ]; then
-		echo 'usage: $1=destination ip $2=the limit of retry $3=retry interval(second, optional, default: 10s)' 1>&2
+		echo 'Usage: $1=destination ip $2=the limit of retry $3=retry interval(optional, [smhd]option available, default: 10s)' 1>&2
 		exit 1
 	fi
 

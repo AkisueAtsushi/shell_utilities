@@ -21,6 +21,9 @@ DESTINATION_IP=192.168.0.1
 
 . /Directory/to/your/ping_check.sh
 
+#retry limit: 5times(default), retry interval: 10seconds(default)
+ping_check $DESTINATION_IP
+
 #retry limit: 10times, retry interval: 5seconds
 ping_check $DESTINATION_IP 10 5s
 ```

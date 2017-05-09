@@ -44,18 +44,18 @@ EOF
   local retry_count=0
   while :
   do
-          /bin/ping $DESTINATION_IP -c 1 > /dev/null 2>&1
+    /bin/ping $DESTINATION_IP -c 1 > /dev/null 2>&1
 
-          if [ $? -eq 0 ]; then
-                  break
-          else
-                  let retry_count++
+    if [ $? -eq 0 ]; then
+      break
+    else
+      let retry_count++
 
-                  if [ $retry_count -eq $RETRY_LIMIT ]; then
-                          echo "ping did not reached to $DESTINATION_IP" 1>&2
-                          exit 1
-                  fi
-          fi
+      if [ $retry_count -eq $RETRY_LIMIT ]; then
+        echo "ping did not reached to $DESTINATION_IP" 1>&2
+        exit 1
+      fi
+    fi
 
     /bin/sleep $SLEEP_TIME
   done

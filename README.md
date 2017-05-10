@@ -26,6 +26,6 @@ DESTINATION_IP=192.168.0.1
 /Directory/to/your/ping_check.sh $DESTINATION_IP 10 5s
 ```
 
-Result:
-Success: Return empty. 
+Result:  
+Success: Return empty.  
 Failure: Output ERROR message to stderr.

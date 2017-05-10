@@ -7,7 +7,6 @@ set -ue -o pipefail
 export LC_ALL=C
 export LANG=C
 
-
 #validation - number of arguments 
 if [ $# -eq 0 ]; then
   cat <<EOF

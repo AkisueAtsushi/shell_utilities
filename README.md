@@ -27,5 +27,5 @@ DESTINATION_IP=192.168.0.1
 ```
 
 Result:
-Success: Return empty.
+Success: Return empty. 
 Failure: Output ERROR message to stderr.

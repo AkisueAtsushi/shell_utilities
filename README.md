@@ -6,7 +6,7 @@ Any useful shell scripts for maintaining server
 ### ping_check.sh
 
 Description:  
-　To check ping status. try to ping to the destination IP until succeess.  
+　To check ping status. try to ping to the destination IP until succeess or the limit comes.  
 　once it gets successed, never try to ping again, before the limit comes.
 
 Usage:  

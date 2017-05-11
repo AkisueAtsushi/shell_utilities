@@ -7,38 +7,59 @@ set -ue -o pipefail
 export LC_ALL=C
 export LANG=C
 
-#validation - number of arguments 
-if [ $# -eq 0 ]; then
+_usage() {
   cat <<EOF
-    ping_check() is a tool for ...
-
-    Usage:
-      ping_check [destination IP] [the limit of retry(optional, default:5)] [retry interval((optional, [smhd]option available, default: 10s)]
+Usage:
+  ${0##*/} [-d destination IP] [-n the limit of retry(optional, default:5)] [-t retry interval((optional, [smhd]option available, default: 10s)]
 EOF
 
   exit 0 
-fi
+}
 
-#$1 IP validation
-readonly DESTINATION_IP=$1
-IP_CHECK=$(echo ${DESTINATION_IP} | egrep "^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$")
-
-if [ ! "${IP_CHECK}" ] ; then
-  echo "[ERROR] $DESTINATION_IP is not IP Address." 1>&2
-  exit 1
-fi
-
-#$2 Natural number validation
-readonly RETRY_LIMIT=${2:-5}
-expr ${RETRY_LIMIT} + 1 > /dev/null 2>&1
-if [ $? -ge 2 -o $RETRY_LIMIT -lt 0 ]; then
-  echo "$RETRY_LIMIT is not natural number." 1>&2
-  exit 1
-fi
-
-#$3 sleep seconds
-readonly SLEEP_TIME=${3:-"10s"}
+while getopts :d:n:t: opts
+do
+  case $opts in
+    d)
+      readonly DESTINATION_IP=$OPTARG
  
+      IP_CHECK=$(echo ${DESTINATION_IP} | egrep "^(([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$") || true
+      if [ ! "${IP_CHECK}" ] ; then
+        echo "[ERROR] $DESTINATION_IP is not IP Address." 1>&2
+        exit 1
+      fi
+      ;;
+    n)
+      readonly RETRY_LIMIT=$OPTARG
+
+      set +e
+      expr ${RETRY_LIMIT} + 1 > /dev/null 2>&1
+      if [ $? -ge 2 ]; then
+        echo "$RETRY_LIMIT is not natural number." 1>&2
+        exit 1
+      elif [ ${RETRY_LIMIT} -le 0 ]; then
+        echo "$RETRY_LIMIT is not natural number." 1>&2
+        exit 1
+      fi
+      set -e
+      ;;
+    t)
+      readonly SLEEP_TIME=$OPTARG
+      ;;
+    :|\?)
+      _usage
+      ;;
+  esac
+done
+
+#reconfirm arguments
+set +u
+test -v ${DESTINATION_IP-} && _usage
+
+test -v ${RETRY_LIMIT-} && readonly RETRY_LIMIT=5
+
+test -v ${SLEEP_TIME-} && readonly SLEEP_TIME="10s"
+set -u
+
 retry_count=0
 while :
 do

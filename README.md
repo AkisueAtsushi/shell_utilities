@@ -5,7 +5,9 @@ Any useful shell scripts for maintaining server
 
 ### ping_check.sh
 
-To check ping status.  
+Description:  
+　To check ping status. try to ping to the destination IP until succeess.  
+　once it gets successed, never try to ping again, before the limit comes.
 
 Usage:  
   ping_check.sh [-d destination IP] [-n the limit of retry(optional, default:5)] [-t retry interval((optional, [smhd]option available, default: 10s)]  

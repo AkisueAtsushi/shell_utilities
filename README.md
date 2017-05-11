@@ -5,12 +5,10 @@ Any useful shell scripts for maintaining server
 
 ### ping_check.sh
 
-it only contains "ping_check" function.  
+To check ping status.  
 
 Usage:  
-	$1=destination IP   
-	$2=the limit of retry(optional, default: 5)  
-	$3=retry interval(optional, [smhd]option available, default: 10s)  
+  ${0##*/} [-d destination IP] [-n the limit of retry(optional, default:5)] [-t retry interval((optional, [smhd]option available, default: 10s)]  
 
 Example:
 
@@ -19,13 +17,11 @@ Example:
 
 DESTINATION_IP=192.168.0.1
 
-. /Directory/to/your/ping_check.sh
-
 #retry limit: 5times(default), retry interval: 10seconds(default)
-ping_check $DESTINATION_IP
+/Directory/to/your/ping_check.sh -d $DESTINATION_IP
 
 #retry limit: 10times, retry interval: 5seconds
-ping_check $DESTINATION_IP 10 5s
+/Directory/to/your/ping_check.sh -d $DESTINATION_IP -n 10 -t 5s
 ```
 
 Result:  

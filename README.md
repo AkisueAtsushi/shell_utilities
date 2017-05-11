@@ -8,7 +8,7 @@ Any useful shell scripts for maintaining server
 To check ping status.  
 
 Usage:  
-  ${0##*/} [-d destination IP] [-n the limit of retry(optional, default:5)] [-t retry interval((optional, [smhd]option available, default: 10s)]  
+  ping_check.sh [-d destination IP] [-n the limit of retry(optional, default:5)] [-t retry interval((optional, [smhd]option available, default: 10s)]  
 
 Example:
 

@@ -23,7 +23,7 @@ do
       CHANNEL=$OPTARG
       ;;
     i)
-      EMOJI=$OPTARG
+      FACEICON=$OPTARG
       ;;
     n)
       BOTNAME=$OPTARG
@@ -46,7 +46,7 @@ set -u
 readonly CHANNEL=${CHANNEL:-"#general"}
 
 #slack icon
-readonly EMOJI=${EMOJI:-":ok:"}
+readonly FACEICON=${FACEICON:-":ok:"}
 
 #slack sender name
 readonly BOTNAME=${BOTNAME:-"MyBot"}
@@ -73,7 +73,7 @@ readonly MESSAGE='```'`cat ${MESSAGEFILE}`'```'
 payload="payload={
     \"channel\": \"${CHANNEL}\",
     \"username\": \"${BOTNAME}\",
-    \"icon_emoji\": \"${EMOJI}\",
+    \"icon_emoji\": \"${FACEICON}\",
     \"text\": \"${HEAD}${MESSAGE}\"
 }"
 

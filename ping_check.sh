@@ -71,7 +71,7 @@ do
     let retry_count++
 
     if [ $retry_count -eq $RETRY_LIMIT ]; then
-      echo "ping did not reached to $DESTINATION_IP" | /root/util/webhooks.sh -m "ping failure" -i ":ng:"
+      echo "ping did not reached to $DESTINATION_IP" | /root/util/webhooks.sh -m "ping failure" -i ":ng:" -c "#home-servers" -n "cronjob" -u `openssl rsautl -decrypt -inkey /root/.ssh/home_credentials.private -in /root/util/.pass/slack_webhook.rsa`
       exit 1
     fi
   fi

@@ -25,7 +25,7 @@ Example:
 
 WEBHOOKS="YOUR SLACK WEBHOOK URL"
 
-#Post message at #general on your slack, Name is "MyBot", Icon is ":ok:" No message header
+#Post message at #general on your slack, Name is "MyBot", Icon is ":ok:", No message header
 echo "Test" | /Directory/to/your/webhooks.sh -u ${WEBHOOKS}
 
 #To notify your cronjob result

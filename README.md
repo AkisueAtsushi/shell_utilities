@@ -3,6 +3,36 @@ Any useful shell scripts for maintaining server
 
 ---
 
+### webhooks.sh
+
+Description:  
+　To post message on slack.
+
+Usage:  
+　webhooks.sh [-u webhook url] [-m head for message] [-c channel] [-i icon] [-n botname]  
+
+Option:  
+　-u Your slack webhook url *\*required\**  
+　-m message header (option)  
+　-c channel which is posted the message (default: #general)  
+　-i icon(default: :ok:)  
+　-n Bot Name(default: MyBot)  
+ 
+Example:
+
+```
+#!/bin/bash
+
+WEBHOOKS="YOUR SLACK WEBHOOK URL"
+
+#Post message at #general on your slack, Name is "MyBot", Icon is ":ok:" No message header
+echo "Test" | /Directory/to/your/webhooks.sh -u ${WEBHOOKS}
+
+#To notify your cronjob result
+echo "Success" | /Directory/to/your/webhooks.sh -u ${WEBHOOKS} -m "my cron job" -i ":ok:" -c "#specific-channel" -n "cronjob" 
+```
+---
+
 ### ping_check.sh
 
 Description:  

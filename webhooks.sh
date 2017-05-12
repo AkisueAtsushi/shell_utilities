@@ -9,7 +9,7 @@ export LANG=C
 
 
 _usage() {
-  echo "Usage: $0 [-m message] [-c channel] [-i icon] [-n botname]" 1>&2
+  echo "Usage: ${0##*/} [-u webhook url] [-m message] [-c channel] [-i icon] [-n botname]" 1>&2
   exit 0
 }
 
